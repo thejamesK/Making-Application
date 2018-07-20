@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 
-public class Main extends JFrame
+public class Main extends JFrame implements ActionListener
 {
     public Main()
     {
@@ -22,17 +22,21 @@ public class Main extends JFrame
         
         redColor = new JButton("Red");
         blackColor = new JButton("Black");
+        blueColor = new JButton("Blue");
         
         redColor.addActionListener(new colorListener(Color.RED));
 //        blackColor.addActionListener(new colorListener(Color.BLACK));
+
+        blueColor.addActionListener(this);
         
         
         panel.add(redColor);
         panel.add(blackColor);
+        panel.add(blueColor);
         
-//        blackColor.addActionListener((ActionEvent ae) -> {
-//            panel.setBackground(Color.BLACK);
-//        });
+        blackColor.addActionListener((ActionEvent ae) -> {
+            panel.setBackground(Color.BLACK);
+        });
         
         
         buildButton("Green", Color.GREEN);
@@ -46,6 +50,7 @@ public class Main extends JFrame
     JPanel panel = new JPanel();
     JButton redColor;
     JButton blackColor;
+    JButton blueColor;
     
     public void buildButton(String name, Color c)
     {
@@ -55,6 +60,13 @@ public class Main extends JFrame
         });
                 
         panel.add(button);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent ae) 
+    {
+        if (ae.getSource() == blueColor)
+            panel.setBackground(Color.BLUE);
     }
     
     
